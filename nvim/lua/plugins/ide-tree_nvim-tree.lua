@@ -6,12 +6,19 @@ return {
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 
+		local function calculate_tree_width()
+			local screen_width = vim.o.columns
+			return math.floor(screen_width * 0.25) -- Adjust the multiplier (0.3) as needed
+		end
+
 		local nvimtree = require("nvim-tree")
 		nvimtree.setup({
 			view = {
 				number = false,
 				-- relativenumber = true,
-				width = 38,
+				-- width = 38,
+				-- adaptive_size = true,
+				width = calculate_tree_width,
 			},
 			renderer = {
 				group_empty = true,

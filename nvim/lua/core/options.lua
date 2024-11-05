@@ -7,6 +7,7 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 vim.opt.colorcolumn = "80,120"
+vim.opt.scrolloff = 10 -- keep extra lines from top and bottom when moving cursor
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark" -- colorschemes that can be light or dark will be made dark

@@ -10,6 +10,7 @@ local mason_jdtls_path = "~/.local/share/nvim/mason/packages/jdtls/"
 local conf_path = vim.fn.expand(mason_jdtls_path .. "config_mac")
 local jar_luncher = vim.fn.glob(mason_jdtls_path .. "plugins/org.eclipse.equinox.launcher_*.jar")
 local root_init_files = { ".git", "pom.xml", "mvnw", "gradlew" }
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 require("spring_boot").init_lsp_commands()
 
@@ -35,6 +36,7 @@ local config = {
 		"-data",
 		workspace_path,
 	},
+	capabilities = capabilities,
 	root_dir = vim.fs.dirname(vim.fs.find(root_init_files, { upward = true })[1]),
 	settings = {
 		java = {
@@ -58,6 +60,13 @@ local config = {
 					template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
 				},
 				useBlocks = true,
+			},
+			completion = {
+				favoriteStaticMembers = {
+					"org.assertj.core.api.Assertions.*",
+					"org.mockito.Mockito.*",
+					"org.mockito.ArgumentMatchers.*",
+				},
 			},
 		},
 		init_options = {

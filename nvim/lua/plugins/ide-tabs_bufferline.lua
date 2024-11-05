@@ -30,11 +30,11 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<A-l>", "<cmd>BufferLineCycleWindowlessNext<cr>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<A-h>", "<cmd>BufferLineCycleWindowlessPrev<cr>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<A-,>", "<cmd>BufferLineCyclePrev<cr>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<A-.>", "<cmd>BufferLineCycleNext<cr>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<A-<>", "<cmd>BufferLineMovePrev<cr>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<A->>", "<cmd>BufferLineMoveNext<cr>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<A-c>", "<cmd>bd|bprev<cr>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<A-,>", "<cmd>BufferLineMovePrev<cr>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<A-.>", "<cmd>BufferLineMoveNext<cr>", { noremap = true, silent = true })
 
 		vim.keymap.set("n", "<A-1>", "<cmd>BufferLineGoToBuffer 1<cr>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<leader>1", "<cmd>BufferLineGoToBuffer 1<cr>", { noremap = true, silent = true })
