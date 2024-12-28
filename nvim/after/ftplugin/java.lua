@@ -6,11 +6,10 @@ vim.opt.shiftwidth = 2 -- n spaces for indent width
 
 local project_name = string.gsub(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h"), "/", "_")
 local workspace_path = vim.fn.expand("~/.cache/jdtls/workspace/common-workspace/" .. project_name)
+
 local mason_jdtls_path = "~/.local/share/nvim/mason/packages/jdtls/"
-local conf_path = vim.fn.expand(mason_jdtls_path .. "config_mac")
+local conf_path = vim.fn.expand(mason_jdtls_path .. "config_mac_arm")
 local jar_luncher = vim.fn.glob(mason_jdtls_path .. "plugins/org.eclipse.equinox.launcher_*.jar")
-local root_init_files = { ".git", "pom.xml", "mvnw", "gradlew" }
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 require("spring_boot").init_lsp_commands()
 
@@ -21,9 +20,10 @@ local config = {
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
+		"-Dlog.protocol=true",
 		"-Dlog.level=ALL",
-		"-Xmx2G",
 		"-javaagent:" .. vim.fn.glob(mason_jdtls_path .. "*.jar"),
+		"-Xmx2G",
 		"--add-modules=ALL-SYSTEM",
 		"--add-opens",
 		"java.base/java.util=ALL-UNNAMED",
@@ -36,10 +36,25 @@ local config = {
 		"-data",
 		workspace_path,
 	},
-	capabilities = capabilities,
-	root_dir = vim.fs.dirname(vim.fs.find(root_init_files, { upward = true })[1]),
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	root_dir = vim.fs.dirname(vim.fs.find({ ".git", "pom.xml", "gradlew" }, { upward = true })[1]),
 	settings = {
 		java = {
+			configuration = {
+				runtimes = {
+					{
+						name = "JavaSE-21",
+						path = "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
+					},
+					{
+						name = "JavaSE-23",
+						path = "/Library/Java/JavaVirtualMachines/temurin-23.jdk/Contents/Home",
+					},
+				},
+			},
+			trace = {
+				server = "verbose",
+			},
 			flags = {
 				allow_incremental_sync = true,
 			},
@@ -69,9 +84,9 @@ local config = {
 				},
 			},
 		},
-		init_options = {
-			bundles = require("spring_boot").java_extensions(),
-		},
+	},
+	init_options = {
+		bundles = require("spring_boot").java_extensions(),
 	},
 }
 

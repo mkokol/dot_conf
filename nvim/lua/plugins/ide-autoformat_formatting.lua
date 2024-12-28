@@ -13,7 +13,6 @@ return {
 				css = { "prettier" },
 				scss = { "prettier" },
 				html = { "htmlbeautifier" },
-				vue = { "prettier" },
 				lua = { "stylua" },
 				sh = { "shellcheck" },
 				go = { "gofmt" },
@@ -21,11 +20,12 @@ return {
 				java = { "google-java-format" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
+				vue = { "prettier" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 1000,
+				timeout_ms = 300,
 			},
 		})
 

@@ -11,6 +11,11 @@ return {
 			sections = {
 				lualine_x = {
 					{
+						"rest",
+						icon = "",
+						fg = "#428890",
+					},
+					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
 						color = { fg = "#ff9e64" },

@@ -1,5 +1,6 @@
 vim.cmd("let g:netrw_liststyle = 3") -- represent defoult neovim explorer as a tree
 vim.opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+vim.g.opentTermCout = 0
 
 -- common styling
 vim.opt.relativenumber = true
@@ -7,7 +8,7 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 vim.opt.colorcolumn = "80,120"
-vim.opt.scrolloff = 10 -- keep extra lines from top and bottom when moving cursor
+vim.opt.scrolloff = 16 -- keep extra lines from top and bottom when moving cursor
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark" -- colorschemes that can be light or dark will be made dark
