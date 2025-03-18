@@ -5,6 +5,13 @@ return {
 		local conform = require("conform")
 
 		conform.setup({
+			formatters = {
+				djlint = {
+					command = "djlint",
+					args = { "--reformat", "--profile=twig" }, -- Enable Twig profile
+					stdin = true,
+				},
+			},
 			formatters_by_ft = {
 				json = { "fixjson", "prettier" },
 				yaml = { "yamlfix" },
@@ -18,14 +25,16 @@ return {
 				go = { "gofmt" },
 				python = { "isort", "black" },
 				java = { "google-java-format" },
+				php = { "php-cs-fixer" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				vue = { "prettier" },
+				twig = { "djlint" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 300,
+				timeout_ms = 1000,
 			},
 		})
 
@@ -33,7 +42,7 @@ return {
 			conform.format({
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 1000,
+				timeout_ms = 300,
 			})
 		end, { desc = "Format file or range (in visual mode)" })
 	end,

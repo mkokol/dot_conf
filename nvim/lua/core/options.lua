@@ -15,6 +15,7 @@ vim.opt.background = "dark" -- colorschemes that can be light or dark will be ma
 vim.opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 vim.opt.list = true
+---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = {
 	tab = "» ",
 	space = "·",

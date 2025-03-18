@@ -28,17 +28,19 @@ return {
 
 			-- import mason-lspconfig
 			local mason_lspconfig = require("mason-lspconfig")
+			---@diagnostic disable-next-line: missing-fields
 			mason_lspconfig.setup({
-				-- list of servers for mason to install
+				-- list of lsp servers for mason to install
 				ensure_installed = {
 					"html",
 					"cssls", -- css, scss
-					"tailwindcss",
+					-- "tailwindcss",
 					"volar", -- vuejs
 					"ts_ls", -- javascript /typoscipt
 					"lua_ls", --lua
 					"pyright", -- python
 					"jdtls", -- java
+					"intelephense", -- php
 				},
 				-- automatic_installation = true,
 			})
@@ -53,14 +55,18 @@ return {
 					"google-java-format", -- java formatter
 					"xmlformatter", -- xml formatter
 					"gofumpt", -- go formatter
+					"php-cs-fixer", -- php formatter
 
 					"eslint_d",
 					"prettier", -- prettier formatter
+					-- pip install djlint
+					"djlint", -- twig
 
 					-- "luacheck", -- lua linter // you need luarock to make that working
 					"eslint_d", -- js/ts linter
 					"pylint", -- python linter
 					"checkstyle", -- java linter
+					"phpstan", -- php linter
 				},
 				-- automatic_installation = true,
 			})
@@ -106,9 +112,13 @@ return {
 				["cssls"] = function()
 					require("plugins.lsp.conf.cssls").setup(lspconfig, capabilities)
 				end,
-				["tailwindcss"] = function()
-					require("plugins.lsp.conf.tailwindcss").setup(lspconfig, capabilities)
+				-- ["tailwindcss"] = function()
+				-- 	require("plugins.lsp.conf.tailwindcss").setup(lspconfig, capabilities)
+				-- end,
+				["intelephense"] = function()
+					require("plugins.lsp.conf.intelephense").setup(lspconfig, capabilities)
 				end,
+
 				["pyright"] = function()
 					-- I'm setting up pytiight in after/ftplugin/python.lua for now
 				end,

@@ -3,6 +3,7 @@ return {
 	event = { "InsertEnter" },
 	config = function()
 		local autotag = require("nvim-ts-autotag")
+		---@diagnostic disable-next-line: missing-fields
 		autotag.setup({
 			opts = {
 				-- Defaults
