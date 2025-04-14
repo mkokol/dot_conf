@@ -1,4 +1,5 @@
 return {
+
 	{
 		"williamboman/mason.nvim",
 		dependencies = {
@@ -40,7 +41,6 @@ return {
 					"lua_ls", --lua
 					"pyright", -- python
 					"jdtls", -- java
-					"intelephense", -- php
 				},
 				-- automatic_installation = true,
 			})
@@ -55,18 +55,12 @@ return {
 					"google-java-format", -- java formatter
 					"xmlformatter", -- xml formatter
 					"gofumpt", -- go formatter
-					"php-cs-fixer", -- php formatter
-
-					"eslint_d",
 					"prettier", -- prettier formatter
-					-- pip install djlint
-					"djlint", -- twig
 
 					-- "luacheck", -- lua linter // you need luarock to make that working
 					"eslint_d", -- js/ts linter
 					"pylint", -- python linter
 					"checkstyle", -- java linter
-					"phpstan", -- php linter
 				},
 				-- automatic_installation = true,
 			})

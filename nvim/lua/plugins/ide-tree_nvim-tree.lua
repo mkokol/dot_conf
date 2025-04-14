@@ -8,10 +8,12 @@ return {
 
 		local function calculate_tree_width()
 			local screen_width = vim.o.columns
-			return math.floor(screen_width * 0.25) -- Adjust the multiplier (0.3) as needed
+
+			return math.floor(screen_width * 0.26)
 		end
 
 		local nvimtree = require("nvim-tree")
+
 		nvimtree.setup({
 			view = {
 				number = false,
@@ -36,12 +38,11 @@ return {
 
 		-- set keymaps
 		vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file explorer" })
-		vim.keymap.set(
-			"n",
-			"<leader>ef",
-			"<cmd>NvimTreeFindFileToggle<cr>",
-			{ desc = "Toggle explorer on current file" }
-		)
+		vim.keymap.set("n", "<leader>ef", function()
+			local api = require("nvim-tree.api")
+			api.tree.close()
+			api.tree.find_file({ open = true, update_root = true })
+		end, { desc = "Always reopen explorer focused on current file" })
 		vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<cr>", { desc = "Collapse explorer" })
 		vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<cr>", { desc = "Refresh explorer" })
 	end,

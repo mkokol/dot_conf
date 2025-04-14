@@ -47,8 +47,8 @@ local config = {
 						path = "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
 					},
 					{
-						name = "JavaSE-23",
-						path = "/Library/Java/JavaVirtualMachines/temurin-23.jdk/Contents/Home",
+						name = "JavaSE-24",
+						path = "/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home",
 					},
 				},
 			},

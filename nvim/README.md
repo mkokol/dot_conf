@@ -2,10 +2,21 @@
 
 some generic structre for neovim setup
 
+## Overview and ideas
+
 Interesting resources that I'm watching for improvements ideas:
 
 - https://github.com/adibhanna/nvim
 
-Requiroment needet to make it working:
+## Dependencies
 
-pip install djlint
+Install all telescope dependencies:
+
+```sh
+# chack missing dependencies for telescope
+:checkhealth telescope
+
+# Install if missing:
+brew install ripgrep
+brew install fd
+```

@@ -3,6 +3,7 @@ vim.opt.clipboard:append("unnamedplus") -- use system clipboard as default regis
 vim.g.opentTermCout = 0
 
 -- common styling
+vim.opt.showmode = false
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true

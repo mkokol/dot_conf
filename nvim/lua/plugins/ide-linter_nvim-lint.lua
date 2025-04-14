@@ -8,10 +8,12 @@ return {
 		local lint = require("lint")
 
 		-- https://github.com/PauloRPA/neovim_config/blob/958a04376b5eaf95a18e7003d9b3b66f025dff96/config/nvim/assets/lint/java/checkstyle/custom_google_checks.xml
-		lint.linters.checkstyle.args = {
-			"-c",
-			os.getenv("HOME") .. "/.config/nvim/conf/java-checkstyle.xml",
-		}
+		-- lint.linters.checkstyle.args = {
+		-- 	"-c",
+		-- 	function()
+		-- 		return os.getenv("HOME") .. "/.config/nvim/conf/java-checkstyle.xml"
+		-- 	end,
+		-- }
 
 		lint.linters_by_ft = {
 			javascript = { "eslint_d" },

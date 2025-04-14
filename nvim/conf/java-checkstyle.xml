@@ -193,8 +193,8 @@
       <property name="basicOffset" value="2"></property>
       <property name="braceAdjustment" value="2"></property>
       <property name="caseIndent" value="2"></property>
-      <property name="throwsIndent" value="4"></property>
-      <property name="lineWrappingIndentation" value="4"></property>
+      <property name="throwsIndent" value="2"></property>
+      <property name="lineWrappingIndentation" value="2"></property>
       <property name="arrayInitIndent" value="2"></property>
     </module>
     <module name="AbbreviationAsWordInName">
