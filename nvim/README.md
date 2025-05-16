@@ -20,3 +20,19 @@ Install all telescope dependencies:
 brew install ripgrep
 brew install fd
 ```
+
+Install all lazygit dependencies:
+
+```sh
+brew install lazygit
+```
+
+Install all terraform dependencies:
+
+```sh
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+terraform -install-autocomplete
+```
+

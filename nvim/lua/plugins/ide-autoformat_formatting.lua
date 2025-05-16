@@ -18,7 +18,7 @@ return {
 
 				go = { "gofmt" },
 				python = { "isort", "black" },
-				java = { "google-java-format" },
+				-- java = { "google-java-format" },
 
 				javascript = { "prettier" },
 				typescript = { "prettier" },

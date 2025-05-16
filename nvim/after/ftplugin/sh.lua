@@ -1,3 +1,3 @@
 -- tabs & indentation
-vim.opt.tabstop = 4 -- n spaces for tabs (prettier default)
-vim.opt.shiftwidth = 4 -- n spaces for indent width
+vim.opt.expandtab = false -- expand tab to spaces
+vim.opt.autoindent = false -- copy indent from current line when starting new one

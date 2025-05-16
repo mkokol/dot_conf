@@ -19,7 +19,7 @@ return {
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
 			python = { "pylint" },
-			java = { "checkstyle" },
+			-- java = { "checkstyle" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

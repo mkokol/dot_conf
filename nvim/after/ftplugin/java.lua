@@ -1,9 +1,3 @@
--- tabs & indentation
-vim.opt.expandtab = true -- expand tab to spaces
-vim.opt.autoindent = true -- copy indent from current line when starting new one
-vim.opt.tabstop = 2 -- n spaces for tabs (prettier default)
-vim.opt.shiftwidth = 2 -- n spaces for indent width
-
 local project_name = string.gsub(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h"), "/", "_")
 local workspace_path = vim.fn.expand("~/.cache/jdtls/workspace/common-workspace/" .. project_name)
 

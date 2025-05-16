@@ -2,6 +2,12 @@ vim.cmd("let g:netrw_liststyle = 3") -- represent defoult neovim explorer as a t
 vim.opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 vim.g.opentTermCout = 0
 
+-- tabs & indentation
+vim.opt.expandtab = true -- expand tab to spaces
+vim.opt.autoindent = true -- copy indent from current line when starting new one
+vim.opt.tabstop = 4 -- n spaces for tabs (prettier default)
+vim.opt.shiftwidth = 4 -- n spaces for indent width
+
 -- common styling
 vim.opt.showmode = false
 vim.opt.relativenumber = true
@@ -37,3 +43,21 @@ vim.opt.smartcase = true -- if you include mixed case in your search, assumes yo
 -- split windows
 vim.opt.splitright = true -- split vertical window to the right
 vim.opt.splitbelow = true -- split horizontal window to the bottom
+
+-- change the diagnostic symbols in the sign column (gutter)
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+			[vim.diagnostic.severity.HINT] = "󰠠 ",
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = "Error",
+			[vim.diagnostic.severity.WARN] = "Warn",
+			[vim.diagnostic.severity.INFO] = "Info",
+			[vim.diagnostic.severity.HINT] = "Hint",
+		},
+	},
+})

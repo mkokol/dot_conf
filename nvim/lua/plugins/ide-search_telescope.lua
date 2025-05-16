@@ -49,10 +49,16 @@ return {
 						["<C-t>"] = trouble_telescope.open,
 					},
 				},
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
+				},
 				preview = {
 					filesize_limit = 0.01, -- MB
 					timeout = 100, -- ms
 				},
+				additional_args = { "--hidden" },
 				file_ignore_patterns = {
 					".git",
 					"node_modules",
@@ -96,6 +102,10 @@ return {
 			end, 300) -- Debounce delay of 300ms
 
 			builtin.live_grep({
+				---@diagnostic disable-next-line: unused-local
+				additional_args = function(opts)
+					return { "--hidden" }
+				end,
 				on_input_filter_cb = function(prompt_bufnr)
 					debounced_input_filter(prompt_bufnr)
 					return {}
