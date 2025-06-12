@@ -39,7 +39,7 @@ return {
 					"html",
 					"cssls", -- css, scss
 					"ts_ls", -- javascript /typoscipt
-					"volar", -- vuejs
+					-- "volar", -- vuejs
 					"pyright", -- python
 					"jdtls", -- java
 					"terraformls", -- terraform

@@ -66,3 +66,9 @@ brew install spring-boot
 ```sh
 brew install go
 ```
+
+#### Copilot
+
+Start Vim/Neovim and invoke next command
+
+    :Copilot setup

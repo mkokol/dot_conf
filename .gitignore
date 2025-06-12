@@ -1,7 +1,11 @@
 tmux/plugins
 !tmux/plugins/.gitadd
+
 nvim/lazy-lock.json
+
 htop
 iterm2/AppSupport
+
 containers
+github-copilot
 
