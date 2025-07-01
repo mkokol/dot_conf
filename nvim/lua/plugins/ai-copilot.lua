@@ -36,13 +36,21 @@ return {
 				end,
 			},
 			display = {
+				diff = {
+					enabled = true,
+				},
 				chat = {
+					show_settings = true,
 					window = {
 						layout = "float", -- float|vertical|horizontal|buffer
 						width = 0.8,
 						height = 0.8,
 					},
 				},
+			},
+			opts = {
+				-- Set debug logging
+				log_level = "DEBUG",
 			},
 		},
 		dependencies = {
@@ -51,7 +59,7 @@ return {
 		},
 		keys = {
 			{ "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "CompanionChat - Show actions popUp" },
-			{ "<leader>aw", "<cmd>CodeCompanionChat<cr>", desc = "CompanionChat - Show chat popUp" },
+			{ "<leader>aw", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CompanionChat - Show chat popUp" },
 		},
 	},
 
