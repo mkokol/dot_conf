@@ -1,13 +1,12 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"neovim/nvim-lspconfig",
+			"mason-org/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"hrsh7th/cmp-nvim-lsp",
-			{ "antosha417/nvim-lsp-file-operations", config = true },
-			{ "folke/neodev.nvim", opts = {} },
+			-- java specific
 			{ "mfussenegger/nvim-jdtls" },
 			{ "JavaHello/spring-boot.nvim" },
 		},
@@ -24,56 +23,39 @@ return {
 				},
 			})
 
+			local required_lsp_servers = {
+				"lua_ls", --lua
+				"html", -- html
+				"cssls", -- css, scss
+				"ts_ls", -- javascript /typoscipt
+				"pyright", -- python
+				"jdtls", -- java
+				"terraformls", -- terraform
+			}
+
+			-- import mason-lspconfig
+			local mason_lspconfig = require("mason-lspconfig")
+			mason_lspconfig.setup({
+				ensure_installed = required_lsp_servers,
+				automatic_enable = false,
+			})
+
 			-- import lspconfig plugin
 			local lspconfig = require("lspconfig")
 			-- used to enable autocompletion (assign to every lsp server config)
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- import mason-lspconfig
-			local mason_lspconfig = require("mason-lspconfig")
-			---@diagnostic disable-next-line: missing-fields
-			mason_lspconfig.setup({
-				-- list of lsp servers for mason to install
-				ensure_installed = {
-					"lua_ls", --lua
-					"html",
-					"cssls", -- css, scss
-					"ts_ls", -- javascript /typoscipt
-					-- "volar", -- vuejs
-					"pyright", -- python
-					"jdtls", -- java
-					"terraformls", -- terraform
-				},
-				-- automatic_installation = true,
-				handlers = {
-					function(server_name)
-						lspconfig[server_name].setup({
-							capabilities = capabilities,
-						})
-					end,
-					["lua_ls"] = function()
-						require("plugins.lsp.conf.lua_ls").setup(lspconfig, capabilities)
-					end,
-					["cssls"] = function()
-						require("plugins.lsp.conf.cssls").setup(lspconfig, capabilities)
-					end,
-					["ts_ls"] = function()
-						require("plugins.lsp.conf.ts_ls").setup(lspconfig, capabilities)
-					end,
-					["volar"] = function()
-						require("plugins.lsp.conf.volar").setup(lspconfig, capabilities)
-					end,
-					["intelephense"] = function()
-						require("plugins.lsp.conf.intelephense").setup(lspconfig, capabilities)
-					end,
-					["pyright"] = function()
-						-- I'm setting up pytiight in after/ftplugin/python.lua for now
-					end,
-					["jdtls"] = function()
-						-- do not init jdtls cause it would be initialasied in after/ftplugin/java.lua
-					end,
-				},
-			})
+			for _, lsp_server_name in ipairs(required_lsp_servers) do
+				local ok, lua_ls_config = pcall(require, "plugins.lsp.conf." .. lsp_server_name)
+
+				if ok and lua_ls_config and type(lua_ls_config.setup) == "function" then
+					lua_ls_config.setup(lspconfig, capabilities)
+				else
+					lspconfig[lsp_server_name].setup({
+						capabilities = capabilities,
+					})
+				end
+			end
 
 			local mason_tool_installer = require("mason-tool-installer")
 			mason_tool_installer.setup({

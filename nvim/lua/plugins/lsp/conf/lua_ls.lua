@@ -4,12 +4,14 @@ return {
 			capabilities = capabilities,
 			settings = {
 				Lua = {
-					-- make the language server recognize "vim" global
 					diagnostics = {
 						globals = { "vim" },
 					},
-					completion = {
-						callSnippet = "Replace",
+					workspace = {
+						library = vim.api.nvim_get_runtime_file("", true),
+					},
+					telemetry = {
+						enable = false,
 					},
 				},
 			},

@@ -36,3 +36,9 @@ brew install hashicorp/tap/terraform
 terraform -install-autocomplete
 ```
 
+## Extra Info
+
+Plugins for review:
+
+https://github.com/folke/lazydev.nvim
+

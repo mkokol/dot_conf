@@ -31,9 +31,12 @@ local config = {
 		workspace_path,
 	},
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
-	root_dir = vim.fs.dirname(vim.fs.find({ ".git", "pom.xml", "gradlew" }, { upward = true })[1]),
+	root_dir = vim.fs.dirname(vim.fs.find({ ".git", "pom.xml", "build.gradle" }, { upward = true })[1]),
 	settings = {
 		java = {
+			format = {
+				enabled = false,
+			},
 			configuration = {
 				runtimes = {
 					{
