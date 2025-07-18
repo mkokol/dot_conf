@@ -6,8 +6,13 @@ vim.keymap.set({ "n", "i", "v" }, "<Esc><Esc>", function()
 	vim.cmd("nohlsearch") -- Clear search highlights
 end, { desc = "Clear search highlights" })
 
-vim.api.nvim_set_keymap("n", "<A-j>", "<C-d>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-k>", "<C-u>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<A-j>", "<C-d>", { desc = "Scroll Down" })
+-- vim.keymap.set("n", "<A-k>", "<C-u>", { desc = "Scroll Up" })
 
-vim.api.nvim_set_keymap("n", "<leader>pl", "<cmd>Lazy<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>pm", "<cmd>Mason<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>lo", "<cmd>Lazy<cr>", { desc = "[L]azy window [O]pen" })
+vim.keymap.set("n", "<leader>mo", "<cmd>Mason<cr>", { desc = "[M]ason window [O]pen" })
+
+vim.keymap.set("n", "<leader>co", "<cmd>copen<cr>", { desc = "Quickfix Open" })
+vim.keymap.set("n", "<leader>cq", "<cmd>cclose<cr>", { desc = "Quickfix close" })
+vim.keymap.set("n", "<A-j>", "<cmd>cnext<cr>", { desc = "Next Quickfix" })
+vim.keymap.set("n", "<A-l>", "<cmd>cprev<cr>", { desc = "Prev Quickfix" })

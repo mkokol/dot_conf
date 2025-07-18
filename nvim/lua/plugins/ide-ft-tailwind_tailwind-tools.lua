@@ -9,6 +9,7 @@ return {
 		local tailwind_config = vim.fn.findfile("tailwind.config.js", vim.fn.getcwd() .. ";")
 
 		if tailwind_config ~= "" then
+			---@diagnostic disable-next-line: missing-fields
 			require("tailwind-tools").setup({
 				filetypes = { "html", "css", "vue", "javascriptreact", "typescriptreact" },
 				colors = {
@@ -23,8 +24,8 @@ return {
 				},
 			})
 
-			vim.api.nvim_set_keymap("n", "<leader>ts", ":TailwindSort<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>tc", ":TailwindColors<CR>", { noremap = true, silent = true })
+			vim.keymap.set("n", "<leader>ts", ":TailwindSort<CR>", { desc = "[T]ailwind [S]ort classes" })
+			vim.keymap.set("n", "<leader>tc", ":TailwindColorToggle<CR>", { desc = "[T]ailwind toggles [C]olor hints" })
 		end
 	end,
 }

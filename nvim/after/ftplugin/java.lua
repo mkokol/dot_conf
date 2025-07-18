@@ -59,8 +59,20 @@ local config = {
 				downloadSources = true,
 			},
 			signatureHelp = { enabled = true },
-			import = { enabled = true },
+			import = {
+				enabled = true,
+				gradle = {
+					wrapper = {
+						enabled = true,
+					},
+				},
+			},
 			rename = { enabled = true },
+			inlayHints = {
+				parameterNames = {
+					enabled = "all", -- literals, all, none
+				},
+			},
 			sources = {
 				organizeImports = {
 					starThreshold = 9999,
