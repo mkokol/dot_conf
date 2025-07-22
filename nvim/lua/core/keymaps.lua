@@ -11,8 +11,3 @@ end, { desc = "Clear search highlights" })
 
 vim.keymap.set("n", "<leader>lo", "<cmd>Lazy<cr>", { desc = "[L]azy window [O]pen" })
 vim.keymap.set("n", "<leader>mo", "<cmd>Mason<cr>", { desc = "[M]ason window [O]pen" })
-
-vim.keymap.set("n", "<leader>co", "<cmd>copen<cr>", { desc = "Quickfix Open" })
-vim.keymap.set("n", "<leader>cq", "<cmd>cclose<cr>", { desc = "Quickfix close" })
-vim.keymap.set("n", "<A-j>", "<cmd>cnext<cr>", { desc = "Next Quickfix" })
-vim.keymap.set("n", "<A-l>", "<cmd>cprev<cr>", { desc = "Prev Quickfix" })
