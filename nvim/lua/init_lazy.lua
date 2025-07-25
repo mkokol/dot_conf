@@ -27,3 +27,5 @@ require("lazy").setup({
 		notify = false,
 	},
 })
+
+vim.keymap.set("n", "<leader>lo", "<cmd>Lazy<cr>", { desc = "[L]azy window [O]pen" })

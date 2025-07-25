@@ -74,7 +74,21 @@ return {
 				},
 			})
 
-			require("plugins.lsp.conf.keymap").setup()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(_)
+					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "See available code actions" })
+					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
+					vim.keymap.set("n", "D", vim.lsp.buf.hover, { desc = "Show [D]ocumentation for code under cursor" })
+					vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { desc = "[G]o to [D]eclaration" })
+					vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show Diagnostics for Line" })
+					vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+					vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+					vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", { desc = "Restart LSP" })
+				end,
+			})
+
+			vim.keymap.set("n", "<leader>mo", "<cmd>Mason<cr>", { desc = "[M]ason window [O]pen" })
 		end,
 	},
 }

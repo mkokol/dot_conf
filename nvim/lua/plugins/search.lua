@@ -22,20 +22,25 @@ return {
 	-- highly extendable fuzzy finder
 	{
 		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- telescop mandatory dependency
 			"nvim-tree/nvim-web-devicons",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 
+			"nvim-telescope/telescope-file-browser.nvim",
+
 			"folke/todo-comments.nvim",
-			-- used for lsp dropdown
-			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-ui-select.nvim", -- used for lsp dropdown
+			"MunifTanjim/nui.nvim", -- for better border control
 		},
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local trouble = require("trouble")
+
+			local Layout = require("nui.layout")
+			local Popup = require("nui.popup")
+			local TSLayout = require("telescope.pickers.layout")
 
 			telescope.setup({
 				defaults = {
@@ -43,18 +48,7 @@ return {
 					selection_caret = "❯ ",
 					color_devicons = true,
 					sorting_strategy = "ascending",
-					layout_config = {
-						prompt_position = "top",
-						width = 0.94,
-						horizontal = {
-							prompt_position = "top",
-							preview_width = 0.7,
-							results_width = 0.3,
-						},
-						vertical = {
-							mirror = false,
-						},
-					},
+					path_display = { "filename_first" },
 					mappings = {
 						i = {
 							["<C-k>"] = actions.move_selection_previous,
@@ -64,19 +58,81 @@ return {
 								actions.send_selected_to_qflist(bufnr)
 								trouble.toggle("quickfix")
 							end,
+							["<esc><esc>"] = actions.close,
 						},
 					},
 					preview = {
-						filesize_limit = 0.01, -- MB
-						timeout = 100, -- ms
+						filesize_limit = 0.1, -- MB
+						timeout = 500, -- ms
 					},
 					additional_args = { "--hidden" },
 					file_ignore_patterns = {
-						"\\.git",
-						"node_modules",
-						"target",
-						"test",
+						"%.git", -- git functional files
+						"node_modules/", -- frontend packages
+						"%.venv/", -- python virtual environment
+						"build/", -- java build folder including build/generated
 					},
+
+					-- idea from https://github.com/nvim-telescope/telescope.nvim/pull/2572
+					create_layout = function(picker)
+						local preview = Popup({
+							focusable = false,
+							border = {
+								style = { "┌", "─", "┐", "│", "", "", "", "│" },
+								text = {
+									top = picker.preview_title,
+								},
+							},
+						})
+						local prompt = Popup({
+							enter = true,
+							border = {
+								style = { "├", "─", "┤", "│", "", "", "", "│" },
+								text = {
+									top = picker.prompt_title,
+								},
+							},
+							win_options = {
+								winhighlight = "Normal:Normal",
+							},
+						})
+						local results = Popup({
+							focusable = false,
+							border = {
+								style = { "├", "─", "┤", "│", "┘", "─", "└", "│" },
+								text = {
+									top = picker.results_title,
+								},
+							},
+						})
+
+						local box = Layout.Box({
+							Layout.Box(preview, { grow = 1 }),
+							Layout.Box(prompt, { size = 2 }),
+							Layout.Box(results, { size = 15 }),
+						}, { dir = "col" })
+
+						local layout = Layout({
+							relative = "editor",
+							position = "50%",
+							size = {
+								height = "94%",
+								width = "94%",
+							},
+						}, box)
+
+						layout.picker = picker
+						layout.results = TSLayout.Window(results)
+						layout.prompt = TSLayout.Window(prompt)
+						layout.preview = TSLayout.Window(preview)
+
+						local layout_update = layout.update
+						function layout:update()
+							layout_update(self, box)
+						end
+
+						return TSLayout(layout)
+					end,
 				},
 				extensions = {
 					fzf = {
@@ -85,11 +141,21 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
+					file_browser = {
+						previewer = true,
+						grouped = true,
+						hidden = true,
+						use_fd = false,
+						hijack_netrw = false,
+						respect_gitignore = false,
+						initial_mode = "normal",
+					},
 				},
 			})
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("ui-select")
+			telescope.load_extension("file_browser")
 
 			-- set keymaps
 			-- search related
@@ -102,28 +168,48 @@ return {
 			vim.keymap.set(
 				"n",
 				"<leader>dw",
-				"<cmd>Telescope diagnostics <CR>",
-				{ desc = "[D]iagnostic in [W]orkspace" }
+				"<cmd>Telescope diagnostics<CR>",
+				{ desc = "[D]iscover diagnostics in [W]orkspace" }
 			)
 			vim.keymap.set(
 				"n",
 				"<leader>df",
 				"<cmd>Telescope diagnostics bufnr=0<CR>",
-				{ desc = "[D]iagnostic in [F]ile in active buffer" }
+				{ desc = "[D]iscover [F]ile diagnostic in active buffer" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>dr",
+				"<cmd>Telescope lsp_references<CR>",
+				{ desc = "[D]iscover LSP [R]eferences" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>dd",
+				"<cmd>Telescope lsp_definitions<CR>",
+				{ desc = "[D]iscover LSP [D]efinitions" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>di",
+				"<cmd>Telescope lsp_implementations<CR>",
+				{ desc = "[D]iscover LSP [I]mplementations" }
+			)
+			vim.keymap.set(
+				"n",
+				"<leader>dt",
+				"<cmd>Telescope lsp_type_definitions<CR>",
+				{ desc = "[D]iscover LSP [T]ype definitions" }
 			)
 
-			-- set keybinds
-			-- opts.desc = "Show LSP references"
-			-- keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
-			--
-			-- opts.desc = "Show LSP definitions"
-			-- keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-			--
 			-- opts.desc = "Show LSP implementations"
-			-- keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+			-- keymap.set("n", "gi", "<cmd>Telescope <CR>", opts)
 			--
 			-- opts.desc = "Show LSP type definitions"
-			-- keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+			-- keymap.set("n", "gt", "<cmd>Telescope <CR>", opts)
+			--
+			--
+			-- require('telescope.builtin').lsp_document_symbols({ symbols = "Function" }
 		end,
 	},
 }
