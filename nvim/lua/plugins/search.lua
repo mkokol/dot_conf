@@ -128,7 +128,7 @@ return {
 
 						local layout_update = layout.update
 						function layout:update()
-							layout_update(self, box)
+							layout_update(box)
 						end
 
 						return TSLayout(layout)
