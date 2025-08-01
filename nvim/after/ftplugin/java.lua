@@ -41,11 +41,11 @@ local config = {
 				runtimes = {
 					{
 						name = "JavaSE-21",
-						path = "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
+						path = os.getenv("HOME") .. "/.asdf/installs/java/temurin-21.0.8+9.0.LTS",
 					},
 					{
 						name = "JavaSE-24",
-						path = "/Library/Java/JavaVirtualMachines/temurin-24.jdk/Contents/Home",
+						path = os.getenv("HOME") .. "/.asdf/installs/java/temurin-24.0.2+12",
 					},
 				},
 			},

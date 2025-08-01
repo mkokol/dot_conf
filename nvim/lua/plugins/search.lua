@@ -163,6 +163,13 @@ return {
 			vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "[F]ind [S]tring in cwd" })
 			vim.keymap.set("n", "<leader>fo", "<cmd>Telescope buffers<cr>", { desc = "[F]ind [O]pen Buffers" })
 			vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
+			vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "[F]ind [H]elp" })
+			vim.keymap.set("n", "<leader>fa", function()
+				require("telescope.builtin").find_files({
+					no_ignore = true,
+					hidden = true,
+				})
+			end, { desc = "[F]ind [A]ll files, including hidden and ignored" })
 
 			-- lsp related
 			vim.keymap.set(

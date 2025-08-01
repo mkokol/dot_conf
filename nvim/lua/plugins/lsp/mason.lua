@@ -24,7 +24,7 @@ return {
 			})
 
 			local required_lsp_servers = {
-				"lua_ls", --lua
+				"lua_ls", -- lua
 				"html", -- html
 				"cssls", -- css, scss
 				"ts_ls", -- javascript /typoscipt
