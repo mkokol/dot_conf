@@ -1,9 +1,12 @@
 return {
-	setup = function(lspconfig, capabilities)
-		lspconfig.lua_ls.setup({
+	config = function(capabilities)
+		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
 			settings = {
 				Lua = {
+					runtime = {
+						version = "LuaJIT",
+					},
 					diagnostics = {
 						globals = { "vim" },
 					},

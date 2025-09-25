@@ -54,10 +54,10 @@ return {
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-a>"] = actions.select_all,
-							["<C-q>"] = function(bufnr)
-								actions.send_selected_to_qflist(bufnr)
-								trouble.toggle("quickfix")
-							end,
+							-- ["<C-q>"] = function(bufnr)
+							-- 	actions.send_selected_to_qflist(bufnr)
+							-- 	trouble.toggle("quickfix")
+							-- end,
 							["<esc><esc>"] = actions.close,
 						},
 					},

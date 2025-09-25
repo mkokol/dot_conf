@@ -36,9 +36,17 @@ brew install hashicorp/tap/terraform
 terraform -install-autocomplete
 ```
 
+Install java palantir:
+
+```sh
+git clone https://github.com/palantir/palantir-java-format.git
+cd palantir-java-format
+git checkout 2.73.0
+./gradlew cli:shadowJar
+```
+
 ## Extra Info
 
 Plugins for review:
 
 https://github.com/folke/lazydev.nvim
-

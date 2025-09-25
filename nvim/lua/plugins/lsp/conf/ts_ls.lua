@@ -1,8 +1,8 @@
 return {
-	setup = function(lspconfig, capabilities)
+	config = function(capabilities)
 		local mason_volar_path = "~/.local/share/nvim/mason/packages/vue-language-server/"
 
-		lspconfig["ts_ls"].setup({
+		vim.lsp.config("ts_ls", {
 			capabilities = capabilities,
 			init_options = {
 				plugins = {
@@ -13,7 +13,7 @@ return {
 					},
 				},
 			},
-			root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+			root_dir = vim.fs.dirname(vim.fs.find({ "package.json", "tsconfig.json", ".git" }, { upward = true })[1]),
 			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 		})
 	end,

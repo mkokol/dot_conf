@@ -1,5 +1,5 @@
 return {
-	setup = function(lspconfig, capabilities)
+	config = function(_)
 		local capabilitiesCssls = vim.lsp.protocol.make_client_capabilities()
 		capabilitiesCssls.textDocument.completion.completionItem.snippetSupport = true
 		capabilitiesCssls.textDocument.completion.completionItem.resolveSupport = {
@@ -10,7 +10,7 @@ return {
 			},
 		}
 
-		lspconfig["cssls"].setup({
+		vim.lsp.config("lua_ls", {
 			capabilities = capabilitiesCssls,
 			settings = {
 				css = {

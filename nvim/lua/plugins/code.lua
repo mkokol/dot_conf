@@ -24,17 +24,20 @@ return {
 					"html",
 					"css",
 					"scss",
-					"bash",
 					"gitignore",
 					"http",
+
 					"lua",
-					"vue",
+					"bash",
 					"javascript",
 					"typescript",
+					"vue",
 					"go",
 					"python",
 					"java",
+
 					"dockerfile",
+					"terraform",
 				},
 				incremental_selection = {
 					enable = true,
@@ -69,13 +72,48 @@ return {
 					lua = { "stylua" },
 					sh = { "shellcheck" },
 
-					go = { "gofmt" },
-					python = { "isort", "black" },
-					-- java = { "google-java-format" },
-
 					javascript = { "prettier" },
 					typescript = { "prettier" },
 					vue = { "prettier" },
+
+					go = { "gofmt" },
+					python = { "ruff_format" },
+					java = { "palantirfmt" },
+
+					terraform = { "terraform_fmt" },
+				},
+				formatters = {
+					palantirfmt = {
+						command = "java",
+						stdin = true,
+						args = function()
+							local base = "jdk.compiler/com.sun.tools.javac.%s=ALL-UNNAMED"
+							local exports = {
+								"api",
+								"file",
+								"parser",
+								"tree",
+								"util",
+								"code",
+								"comp",
+								"jvm",
+								"main",
+								"model",
+							}
+							local args = vim.iter(exports)
+								:map(function(p)
+									return { "--add-exports", string.format(base, p) }
+								end)
+								:flatten()
+								:totable()
+
+							table.insert(args, "-jar")
+							table.insert(args, vim.fn.expand("~/.config/nvim/helpers/palantirfmt-2.27.0-all.jar"))
+							table.insert(args, "-")
+
+							return args
+						end,
+					},
 				},
 				format_on_save = {
 					lsp_fallback = true,
@@ -105,18 +143,15 @@ return {
 		config = function()
 			local lint = require("lint")
 
-			-- https://github.com/PauloRPA/neovim_config/blob/958a04376b5eaf95a18e7003d9b3b66f025dff96/config/nvim/assets/lint/java/checkstyle/custom_google_checks.xml
 			-- lint.linters.checkstyle.args = {
 			-- 	"-c",
-			-- 	function()
-			-- 		return os.getenv("HOME") .. "/.config/nvim/conf/java-checkstyle.xml"
-			-- 	end,
+			-- 	os.getenv("HOME") .. "/.config/nvim/conf/java-checkstyle.xml",
 			-- }
 
 			lint.linters_by_ft = {
 				javascript = { "eslint_d" },
 				typescript = { "eslint_d" },
-				python = { "pylint" },
+				python = { "ruff" },
 				-- java = { "checkstyle" },
 			}
 

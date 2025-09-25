@@ -28,9 +28,11 @@ return {
 				"html", -- html
 				"cssls", -- css, scss
 				"ts_ls", -- javascript /typoscipt
-				"pyright", -- python
+				"ruff", -- python
+
+				-- basedpyright alternative for pyright
 				"jdtls", -- java
-				"terraformls", -- terraform
+				"terraform", -- terraform
 			}
 
 			-- import mason-lspconfig
@@ -40,21 +42,21 @@ return {
 				automatic_enable = false,
 			})
 
-			-- import lspconfig plugin
-			local lspconfig = require("lspconfig")
 			-- used to enable autocompletion (assign to every lsp server config)
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			for _, lsp_server_name in ipairs(required_lsp_servers) do
-				local ok, lua_ls_config = pcall(require, "plugins.lsp.conf." .. lsp_server_name)
+				local ok, lsp_config = pcall(require, "plugins.lsp.conf." .. lsp_server_name)
 
-				if ok and lua_ls_config and type(lua_ls_config.setup) == "function" then
-					lua_ls_config.setup(lspconfig, capabilities)
+				if ok and lsp_config and type(lsp_config.config) == "function" then
+					lsp_config.config(capabilities)
 				else
-					lspconfig[lsp_server_name].setup({
+					vim.lsp.config(lsp_server_name, {
 						capabilities = capabilities,
 					})
 				end
+
+				vim.lsp.enable(lsp_server_name)
 			end
 
 			local mason_tool_installer = require("mason-tool-installer")
@@ -64,9 +66,7 @@ return {
 					"xmlformatter", -- xml formatter
 					"prettier", -- prettier formatter
 					"stylua", -- lua formatter
-					"isort", -- python formatter
-					"black", -- python formatter
-					"pylint", -- python linter
+					"ruff", -- python formatter and linter
 					"google-java-format", -- java formatter
 					"checkstyle", -- java linter
 					"gofumpt", -- go formatter
@@ -77,7 +77,12 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(_)
-					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "See available code actions" })
+					vim.keymap.set(
+						"n",
+						"<leader>ca",
+						vim.lsp.buf.code_action,
+						{ desc = "See available [C]ode [A]ctions" }
+					)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
 					vim.keymap.set("n", "D", vim.lsp.buf.hover, { desc = "Show [D]ocumentation for code under cursor" })
 					vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { desc = "[G]o to [D]eclaration" })

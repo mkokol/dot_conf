@@ -1,6 +1,6 @@
 return {
-	setup = function(lspconfig, capabilities)
-		lspconfig.tailwindcss.setup({
+	config = function(capabilities)
+		vim.lsp.config("tailwindcss", {
 			capabilities = capabilities,
 			filetypes = {
 				"css",
@@ -11,7 +11,9 @@ return {
 				"javascriptreact",
 				"typescriptreact",
 			},
-			root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.ts", "package.json", ".git"),
+			root_dir = vim.fs.dirname(
+				vim.fs.find({ "tailwind.config.js", "tailwind.config.ts", "package.json", ".git" }, { upward = true })[1]
+			),
 		})
 	end,
 }
