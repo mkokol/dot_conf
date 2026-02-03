@@ -27,10 +27,8 @@ return {
 				"lua_ls", -- lua
 				"html", -- html
 				"cssls", -- css, scss
-				"ts_ls", -- javascript /typoscipt
+				"ts_ls", -- javascript / typoscipt
 				"ruff", -- python
-
-				-- basedpyright alternative for pyright
 				"jdtls", -- java
 				"terraform", -- terraform
 			}
@@ -62,15 +60,14 @@ return {
 			local mason_tool_installer = require("mason-tool-installer")
 			mason_tool_installer.setup({
 				ensure_installed = {
+					"stylua", -- lua formatter
 					"jq", -- json formater
 					"xmlformatter", -- xml formatter
 					"prettier", -- prettier formatter
-					"stylua", -- lua formatter
+					"eslint_d", -- js/ts linter
 					"ruff", -- python formatter and linter
-					"google-java-format", -- java formatter
 					"checkstyle", -- java linter
 					"gofumpt", -- go formatter
-					"eslint_d", -- js/ts linter
 				},
 			})
 
@@ -83,7 +80,7 @@ return {
 						vim.lsp.buf.code_action,
 						{ desc = "See available [C]ode [A]ctions" }
 					)
-					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
+					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart [R]e[N]ame" })
 					vim.keymap.set("n", "D", vim.lsp.buf.hover, { desc = "Show [D]ocumentation for code under cursor" })
 					vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { desc = "[G]o to [D]eclaration" })
 					vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show Diagnostics for Line" })

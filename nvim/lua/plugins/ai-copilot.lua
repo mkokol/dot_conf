@@ -27,44 +27,73 @@ return {
 	-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
 	{
 		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"zbirenbaum/copilot.lua",
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"lalitmee/codecompanion-spinners.nvim",
+		},
 		opts = {
+			log_level = "DEBUG",
+
 			adapters = {
-				copilot = function()
-					return require("codecompanion.adapters").extend("copilot", {
-						schema = {
-							model = {
-								default = "claude-sonnet-4",
+				http = {
+					copilot = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "claude-opus-4.5",
+								},
 							},
-						},
-					})
-				end,
+						})
+					end,
+				},
 			},
+
+			rules = {
+				default = {
+					description = "Collection of common files for all projects",
+					files = {
+						".rules",
+						"AGENT.md",
+						"AGENTS.md",
+						".agents/AGENTS.md",
+						vim.fn.expand("~/.agents/AGENTS.md"),
+					},
+				},
+			},
+
 			display = {
 				diff = {
 					enabled = true,
+					provider = "mini_diff", -- mini_diff|split|inline
 				},
 				chat = {
 					show_settings = true,
 					window = {
 						layout = "float", -- float|vertical|horizontal|buffer
-						width = 0.8,
-						height = 0.8,
+						width = 0.86,
+						height = 0.86,
 					},
 				},
 			},
-			opts = {
-				-- Set debug logging
-				log_level = "DEBUG",
+
+			extensions = {
+				spinner = {
+					enabled = true,
+					style = "cursor-relative",
+					color = "DiagnosticInfo",
+				},
 			},
-		},
-		dependencies = {
-			"zbirenbaum/copilot.lua",
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
 		},
 		keys = {
 			{ "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "CompanionChat - Show actions popUp" },
 			{ "<leader>aw", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CompanionChat - Show chat popUp" },
+			{
+				"<leader>ar",
+				"<cmd>lua require('codecompanion').config.commands.ReloadAgents()<cr>",
+				desc = "Reload AGENTS.md memory",
+			},
 		},
 	},
 }
