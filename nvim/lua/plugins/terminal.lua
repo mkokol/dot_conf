@@ -7,7 +7,7 @@ return {
 			--direction = "horizontal",
 			direction = "float",
 			-- use leader t to toggle terminal
-			open_mapping = [[<leader>to]],
+			open_mapping = [[<leader>tt]],
 			start_in_insert = false,
 			-- close_on_exit = false,
 			autochdir = true,

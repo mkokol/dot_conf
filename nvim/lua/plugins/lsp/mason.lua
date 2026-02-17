@@ -30,7 +30,7 @@ return {
 				"ts_ls", -- javascript / typoscipt
 				"ruff", -- python
 				"jdtls", -- java
-				"terraform", -- terraform
+				"terraformls", -- terraform
 			}
 
 			-- import mason-lspconfig

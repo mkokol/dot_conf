@@ -6,9 +6,16 @@ return {
 		event = "VeryLazy",
 		init = function()
 			vim.o.timeout = true
-			vim.o.timeoutlen = 100
+			vim.o.timeoutlen = 200
 		end,
+		keys = {
+			{ "<leader>wo", "<cmd>WhichKey<cr>", desc = "Show All Keymaps" },
+		},
 		opts = {
+			keys = {
+				scroll_down = "J", -- Use Shift+j to scroll down
+				scroll_up = "K", -- Use Shift+k to scroll up
+			},
 			plugins = {
 				marks = true,
 				registers = true,

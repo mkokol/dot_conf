@@ -2,6 +2,7 @@ tmux/plugins
 !tmux/plugins/.gitadd
 
 nvim/lazy-lock.json
+avante.nvim
 
 htop
 iterm2/AppSupport
@@ -9,4 +10,3 @@ iterm2/AppSupport
 containers
 github-copilot
 flutter
-

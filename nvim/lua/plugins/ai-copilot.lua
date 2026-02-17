@@ -1,5 +1,6 @@
 return {
 	-- https://github.com/zbirenbaum/copilot.lua
+	-- copilot setup, is used by othe plugins
 	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
@@ -13,6 +14,7 @@ return {
 	},
 
 	-- https://github.com/zbirenbaum/copilot-cmp
+	-- integrating copilot as auto suggestion
 	{
 		"zbirenbaum/copilot-cmp",
 		dependencies = {
@@ -23,77 +25,64 @@ return {
 		end,
 	},
 
-	-- https://github.com/olimorris/codecompanion.nvim
-	-- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
+	-- https://github.com/yetone/avante.nvim
+	-- using ai as agent
 	{
-		"olimorris/codecompanion.nvim",
+		"yetone/avante.nvim",
 		dependencies = {
-			"zbirenbaum/copilot.lua",
 			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+
+			"zbirenbaum/copilot.lua",
+
+			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"stevearc/dressing.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"lalitmee/codecompanion-spinners.nvim",
+			{
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
 		},
+		build = "make",
+		event = "VeryLazy",
+		version = false, -- Never set this value to "*"! Never!
 		opts = {
-			log_level = "DEBUG",
+			log_level = "debug",
 
-			adapters = {
-				http = {
-					copilot = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "claude-opus-4.5",
-								},
-							},
-						})
-					end,
+			behaviour = {
+				auto_add_current_file = false,
+			},
+
+			provider = "copilot",
+			providers = {
+				copilot = {
+					model = "claude-opus-4.6",
 				},
 			},
 
-			rules = {
-				default = {
-					description = "Collection of common files for all projects",
-					files = {
-						".rules",
-						"AGENT.md",
-						"AGENTS.md",
-						".agents/AGENTS.md",
-						vim.fn.expand("~/.agents/AGENTS.md"),
-					},
+			windows = {
+				width = 50,
+				input = {
+					prefix = "> ",
+					height = 6, -- Height of the input window in vertical layout
 				},
 			},
 
-			display = {
-				diff = {
-					enabled = true,
-					provider = "mini_diff", -- mini_diff|split|inline
-				},
-				chat = {
-					show_settings = true,
-					window = {
-						layout = "float", -- float|vertical|horizontal|buffer
-						width = 0.86,
-						height = 0.86,
-					},
-				},
-			},
-
-			extensions = {
-				spinner = {
-					enabled = true,
-					style = "cursor-relative",
-					color = "DiagnosticInfo",
+			mappings = {
+				sidebar = {
+					close = { "q", "<Esc><Esc>" },
+					close_from_input = { normal = { "q", "<Esc><Esc>" } },
 				},
 			},
 		},
 		keys = {
-			{ "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "CompanionChat - Show actions popUp" },
-			{ "<leader>aw", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CompanionChat - Show chat popUp" },
-			{
-				"<leader>ar",
-				"<cmd>lua require('codecompanion').config.commands.ReloadAgents()<cr>",
-				desc = "Reload AGENTS.md memory",
-			},
+			{ "<leader>aw", "<cmd>AvanteToggle<cr>", desc = "[A]vante toggle chat [W]indow" },
+			{ "<leader>anw", "<cmd>AvanteChatNew<cr>", desc = "[A]vante [N]ew chat [W]indow" },
+			{ "<leader>am", "<cmd>AvanteModels<cr>", desc = "[A]vante change [M]odel" },
 		},
 	},
 }

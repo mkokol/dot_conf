@@ -19,6 +19,10 @@ Install all telescope dependencies:
 # Install if missing:
 brew install ripgrep
 brew install fd
+
+# for rest client
+brew install tree-sitter
+brew install tree-sitter-cli
 ```
 
 Install all lazygit dependencies:

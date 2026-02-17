@@ -104,9 +104,10 @@ return {
 			vim.opt.termguicolors = true
 
 			local function calculate_tree_width()
-				local screen_width = vim.o.columns
+				local max_width = 56
+				local new_width = math.floor(vim.o.columns * 0.26)
 
-				return math.floor(screen_width * 0.26)
+				return (new_width < max_width) and new_width or max_width
 			end
 
 			local nvimtree = require("nvim-tree")

@@ -1,53 +1,43 @@
 return {
 	-- https://github.com/nvim-treesitter/nvim-treesitter
-	-- better code highlight
+	-- parsers, queries, and treesitter-based features
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPre", "BufNewFile" },
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			-- import nvim-treesitter plugin
-			local treesitter = require("nvim-treesitter.configs")
+			require("nvim-treesitter").setup({})
 
-			-- configure treesitter
-			--- @diagnostic disable-next-line: missing-fields
-			treesitter.setup({ -- enable syntax highlighting
-				highlight = {
-					enable = true,
-				},
-				-- enable indentation
-				indent = { enable = true },
-				-- ensure these language parsers are installed
-				ensure_installed = {
-					"json",
-					"yaml",
-					"html",
-					"css",
-					"scss",
-					"gitignore",
-					"http",
+			-- ensure these language parsers are installed
+			require("nvim-treesitter").install({
+				"json",
+				"yaml",
+				"html",
+				"css",
+				"scss",
+				"gitignore",
+				"http",
 
-					"lua",
-					"bash",
-					"javascript",
-					"typescript",
-					"vue",
-					"go",
-					"python",
-					"java",
+				"lua",
+				"bash",
+				"javascript",
+				"typescript",
+				"vue",
+				"go",
+				"python",
+				"java",
 
-					"dockerfile",
-					"terraform",
-				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<C-space>",
-						node_incremental = "<C-space>",
-						scope_incremental = false,
-						node_decremental = "<bs>",
-					},
-				},
+				"dockerfile",
+				"terraform",
+			})
+
+			-- enable treesitter highlighting and indentation for all supported filetypes
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					if pcall(vim.treesitter.start) then
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end
+				end,
 			})
 		end,
 	},

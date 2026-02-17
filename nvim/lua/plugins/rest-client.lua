@@ -3,6 +3,15 @@ return {
 	-- rest client
 	{
 		"rest-nvim/rest.nvim",
+		dependencies = {
+			{
+				"nvim-treesitter/nvim-treesitter",
+				opts = function(_, opts)
+					opts.ensure_installed = opts.ensure_installed or {}
+					vim.list_extend(opts.ensure_installed, { "http" })
+				end,
+			},
+		},
 		config = function()
 			-- Set options using vim.g for rest-nvim
 			vim.g.rest_nvim = {
