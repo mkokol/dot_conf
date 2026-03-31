@@ -1,14 +1,15 @@
 *
 
-!tmux/plugins/.gitadd
-!tmux/tmux.conf
-
+!ghostty
 
 !iterm2
 iterm2/AppSupport
 
 !nvim
 nvim/lazy-lock.json
+
+!tmux/plugins/.gitadd
+!tmux/tmux.conf
 
 !README.md
 
