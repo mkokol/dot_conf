@@ -1,5 +1,9 @@
 return {
 	config = function(capabilities)
+		if not (_G.UserConfig.lsp and _G.UserConfig.lsp.java == true) then
+			return
+		end
+
 		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
 			settings = {
@@ -8,10 +12,11 @@ return {
 						version = "LuaJIT",
 					},
 					diagnostics = {
-						globals = { "vim" },
+						globals = { "vim", "UserConfig" },
 					},
 					workspace = {
-						library = vim.api.nvim_get_runtime_file("", true),
+						-- done by lazydev
+						checkThirdParty = false,
 					},
 					telemetry = {
 						enable = false,

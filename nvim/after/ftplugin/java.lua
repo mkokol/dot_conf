@@ -46,8 +46,8 @@ local config = {
 						path = os.getenv("HOME") .. "/.asdf/installs/java/temurin-21.0.8+9.0.LTS",
 					},
 					{
-						name = "JavaSE-24",
-						path = os.getenv("HOME") .. "/.asdf/installs/java/temurin-24.0.2+12",
+						name = "JavaSE-25",
+						path = os.getenv("HOME") .. "/.asdf/installs/java/temurin-25.0.2+10.0.LTS",
 					},
 				},
 			},

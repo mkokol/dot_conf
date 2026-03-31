@@ -1,5 +1,9 @@
 return {
 	config = function(capabilities)
+		if not (_G.UserConfig.lsp and _G.UserConfig.lsp.javascript == true) then
+			return
+		end
+
 		local mason_volar_path = "~/.local/share/nvim/mason/packages/vue-language-server/"
 
 		vim.lsp.config("ts_ls", {

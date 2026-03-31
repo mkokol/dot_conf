@@ -1,4 +1,7 @@
 return {
+	{
+		"varnishcache-friends/vim-varnish",
+	},
 	-- https://github.com/nvim-treesitter/nvim-treesitter
 	-- parsers, queries, and treesitter-based features
 	{

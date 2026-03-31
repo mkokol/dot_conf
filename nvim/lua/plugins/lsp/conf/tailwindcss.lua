@@ -1,5 +1,9 @@
 return {
 	config = function(capabilities)
+		if not (_G.UserConfig.lsp and _G.UserConfig.lsp.tailwind == true) then
+			return
+		end
+
 		vim.lsp.config("tailwindcss", {
 			capabilities = capabilities,
 			filetypes = {

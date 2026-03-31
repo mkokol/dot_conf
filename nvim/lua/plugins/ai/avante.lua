@@ -1,34 +1,9 @@
 return {
-	-- https://github.com/zbirenbaum/copilot.lua
-	-- copilot setup, is used by othe plugins
-	{
-		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				copilot_node_command = os.getenv("HOME") .. "/.asdf/installs/nodejs/22.17.1/bin/node",
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
-		end,
-	},
-
-	-- https://github.com/zbirenbaum/copilot-cmp
-	-- integrating copilot as auto suggestion
-	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = {
-			"zbirenbaum/copilot.lua",
-		},
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
-
 	-- https://github.com/yetone/avante.nvim
 	-- using ai as agent
 	{
 		"yetone/avante.nvim",
+		enabled = _G.UserConfig.ai and _G.UserConfig.ai.avante == true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",

@@ -1,12 +1,14 @@
-tmux/plugins
+*
+
 !tmux/plugins/.gitadd
+!tmux/tmux.conf
 
-nvim/lazy-lock.json
-avante.nvim
 
-htop
+!iterm2
 iterm2/AppSupport
 
-containers
-github-copilot
-flutter
+!nvim
+nvim/lazy-lock.json
+
+!README.md
+

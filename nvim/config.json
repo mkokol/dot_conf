@@ -1,0 +1,15 @@
+{
+  "lsp": {
+    "lua": true,
+    "python": true,
+    "java": true,
+    "javascript": true,
+    "tailwind": true
+  },
+  "ai": {
+    "copilot": false,
+    "codecompanion": false,
+    "avante": false
+    "claude": false,
+  }
+}
