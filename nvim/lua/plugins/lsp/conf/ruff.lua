@@ -18,7 +18,7 @@ return {
 					enable = true,
 				},
 			},
-			root_makers = { ".venv", ".git" },
+			root_markers = { ".venv", ".git" },
 		})
 	end,
 }

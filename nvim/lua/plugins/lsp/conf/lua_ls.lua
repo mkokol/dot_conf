@@ -1,6 +1,6 @@
 return {
 	config = function(capabilities)
-		if not (_G.UserConfig.lsp and _G.UserConfig.lsp.java == true) then
+		if not (_G.UserConfig.lsp and _G.UserConfig.lsp.lua == true) then
 			return
 		end
 

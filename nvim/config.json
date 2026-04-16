@@ -9,7 +9,7 @@
   "ai": {
     "copilot": false,
     "codecompanion": false,
-    "avante": false
-    "claude": false,
+    "avante": false,
+    "claude": false
   }
 }
