@@ -18,7 +18,13 @@ end
 
 local base_config = load_json("config.json")
 local local_config = load_json("config.local.json")
-_G.UserConfig = vim.tbl_deep_extend("force", base_config, local_config)
+
+---@class UserConfig
+---@field lsp table
+---@field ai table
+
+---@type UserConfig
+_G.UserConfig = vim.tbl_deep_extend("force", base_config, local_config) --[[@as UserConfig]]
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({

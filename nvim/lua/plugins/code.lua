@@ -169,7 +169,6 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp", -- new LSP source for nvim-cmp
 			"hrsh7th/cmp-buffer", -- source for text in buffer
 			"hrsh7th/cmp-path", -- source for file system paths
@@ -251,7 +250,7 @@ return {
 				}, {
 					{ name = "cmdline" },
 				}),
-				matching = { disallow_symbol_nonprefix_matching = false },
+				matching = { disallow_symbol_nonprefix_matching = false } --[[@as any]],
 			})
 		end,
 	},

@@ -6,7 +6,6 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-telescope/telescope.nvim",
-			"neovim/nvim-lspconfig",
 		},
 		config = function()
 			local tailwind_config = vim.fn.findfile("tailwind.config.js", vim.fn.getcwd() .. ";")

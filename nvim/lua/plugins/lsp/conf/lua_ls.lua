@@ -5,7 +5,12 @@ return {
 		end
 
 		vim.lsp.config("lua_ls", {
+			cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
 			capabilities = capabilities,
+			root_markers = {
+				"init.lua",
+			},
+
 			settings = {
 				Lua = {
 					runtime = {
@@ -17,6 +22,10 @@ return {
 					workspace = {
 						-- done by lazydev
 						checkThirdParty = false,
+						library = {
+							vim.fn.stdpath("config"),
+							vim.env.VIMRUNTIME,
+						},
 					},
 					telemetry = {
 						enable = false,

@@ -2,7 +2,6 @@ return {
 	{
 		"mason-org/mason.nvim",
 		dependencies = {
-			"neovim/nvim-lspconfig",
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"hrsh7th/cmp-nvim-lsp",
@@ -22,23 +21,17 @@ return {
 					},
 				},
 			})
+			require("mason-lspconfig").setup()
 
 			local required_lsp_servers = {
 				"lua_ls", -- lua
 				"html", -- html
 				"cssls", -- css, scss
 				"ts_ls", -- javascript / typoscipt
-				"ruff", -- python
+				"pyright", -- python
 				"jdtls", -- java
 				"terraformls", -- terraform
 			}
-
-			-- import mason-lspconfig
-			local mason_lspconfig = require("mason-lspconfig")
-			mason_lspconfig.setup({
-				ensure_installed = required_lsp_servers,
-				automatic_enable = false,
-			})
 
 			-- used to enable autocompletion (assign to every lsp server config)
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -57,8 +50,7 @@ return {
 				vim.lsp.enable(lsp_server_name)
 			end
 
-			local mason_tool_installer = require("mason-tool-installer")
-			mason_tool_installer.setup({
+			require("mason-tool-installer").setup({
 				ensure_installed = {
 					"stylua", -- lua formatter
 					"jq", -- json formater
