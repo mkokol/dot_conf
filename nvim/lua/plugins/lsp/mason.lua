@@ -72,6 +72,12 @@ return {
 						vim.lsp.buf.code_action,
 						{ desc = "See available [C]ode [A]ctions" }
 					)
+					vim.keymap.set(
+						"n",
+						"<leader>li",
+						"<cmd>checkhealth vim.lsp<cr>",
+						{ desc = "List All [L]SP [I]nfo" }
+					)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart [R]e[N]ame" })
 					vim.keymap.set("n", "D", vim.lsp.buf.hover, { desc = "Show [D]ocumentation for code under cursor" })
 					vim.keymap.set("n", "gd", vim.lsp.buf.declaration, { desc = "[G]o to [D]eclaration" })

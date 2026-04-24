@@ -7,10 +7,10 @@ return {
 		vim.lsp.config("lua_ls", {
 			cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
 			capabilities = capabilities,
+			filetypes = { "lua" },
 			root_markers = {
 				"init.lua",
 			},
-
 			settings = {
 				Lua = {
 					runtime = {
