@@ -24,6 +24,8 @@ return {
 						reportOptionalMemberAccess = false,
 					},
 					venv = ".venv",
+					venvPath = ".",
+					pythonPath = "./.venv/bin/python",
 				},
 			},
 		})
