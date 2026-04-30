@@ -71,4 +71,10 @@ brew install go
 
 Start Vim/Neovim and invoke next command
 
-    :Copilot setup
+```
+:Copilot setup
+```
+
+#### Set up
+
+echo 'export ZDOTDIR="$HOME/.config/zsh"' >> ~/.zshenv

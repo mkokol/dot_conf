@@ -172,6 +172,8 @@ return {
 			end, { desc = "[F]ind [A]ll files, including hidden and ignored" })
 
 			-- lsp related
+			-- local tb = require("telescope.builtin")
+
 			vim.keymap.set(
 				"n",
 				"<leader>dw",
@@ -190,6 +192,9 @@ return {
 				"<cmd>Telescope lsp_references<CR>",
 				{ desc = "[D]iscover LSP [R]eferences" }
 			)
+			-- vim.keymap.set("n", "<leader>dd", function()
+			-- 	tb.lsp_definitions({ show_line = false })
+			-- end, { desc = "[D]iscover LSP [D]efinitions" })
 			vim.keymap.set(
 				"n",
 				"<leader>dd",

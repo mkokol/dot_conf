@@ -15,5 +15,12 @@ nvim/config.local.json
 !tmux/plugins/.gitadd
 !tmux/tmux.conf
 
+!zsh
+!zsh/.zshrc
+!zsh/.zprofile
+!zsh/conf.d
+!zsh/conf.d/.gitadd
+
+
 !README.md
 
