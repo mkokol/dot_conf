@@ -19,6 +19,7 @@ plugins=(
   aws
   fluxcd
   terraform
+  virtualenv
 )
 
 source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
