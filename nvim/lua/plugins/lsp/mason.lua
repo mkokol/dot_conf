@@ -29,6 +29,7 @@ return {
 				"cssls", -- css, scss
 				"ts_ls", -- javascript / typoscipt
 				"pyright", -- python
+				"clangd", -- cpp
 				"jdtls", -- java
 				"terraformls", -- terraform
 			}
